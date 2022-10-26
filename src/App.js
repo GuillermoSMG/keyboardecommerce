@@ -1,3 +1,4 @@
+import React from "react"; //! SIEMPRE importar React
 import { Container } from "@mui/system";
 import Footer from "./components/Footer";
 import ItemListContainer from "./components/ItemListContainer";
@@ -14,6 +15,7 @@ export default function App() {
           alignItems: "center",
           justifyContent: "center",
         }}
+        /* Para buenas practicas este container deberia ir en el Componente */
       >
         <ItemListContainer greeting="¡Bienvenido!" />
       </Container>
