@@ -99,7 +99,7 @@ export default function Navbar() {
               textDecoration: 'none',
             }}
           >
-            MiApp
+            Keyboard
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' },  justifyContent: "end", paddingRight: "2rem"  }}>
             {pages.map((page) => (
@@ -112,9 +112,8 @@ export default function Navbar() {
               </Button>
             ))}
           </Box>
-
           <Box>
-                <CartWidget />
+            <CartWidget />
           </Box>
         </Toolbar>
       </Container>

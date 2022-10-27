@@ -7,16 +7,7 @@ export default function App() {
   return (
     <>
       <Navbar />
-      <Container
-        sx={{
-          height: "80vh",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-        }}
-      >
-        <ItemListContainer greeting="¡Bienvenido!" />
-      </Container>
+      <ItemListContainer greeting="¡Bienvenido!" />
       <Footer />
     </>
   );
