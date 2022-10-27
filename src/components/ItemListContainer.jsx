@@ -18,8 +18,8 @@ export default function ItemListContainer({greeting}) {
         <Box padding="3rem" sx={{display: "flex", flexDirection: "column", alignItems: "center", boxShadow: "0px 0px 10px #999"}}>
             <Typography variant="h4">{greeting}</Typography>
             <KeyboardIcon sx={{fontSize: "5em"}}/>
+            <ItemCounter stock={5} initial={1} />
         </Box>
-        <ItemCounter stock={5} initial={1} />
       </Container>
     );
 }
