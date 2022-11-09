@@ -1,14 +1,24 @@
-import { Container } from "@mui/system";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Footer from "./components/Footer";
+import ItemDetailContainer from "./components/ItemDetailContainer";
 import ItemListContainer from "./components/ItemListContainer";
-import Navbar from "./components/Navbar";
+import NavBar from "./components/Navbar";
 
 export default function App() {
   return (
     <>
-      <Navbar />
-      <ItemListContainer greeting="¡Bienvenido!" />
-      <Footer />
+      <BrowserRouter>
+        <NavBar />
+        <Routes>
+          <Route path="/" element={<ItemListContainer />} />
+          <Route
+            path="/categoria/:idcategoria"
+            element={<ItemListContainer />}
+          />
+          <Route path="/item/:iditem" element={<ItemDetailContainer />} />
+        </Routes>
+        <Footer />
+      </BrowserRouter>
     </>
   );
 }

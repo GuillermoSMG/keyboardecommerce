@@ -1,10 +1,31 @@
-import React, { useEffect, useState } from "react";
-import KeyboardIcon from '@mui/icons-material/Keyboard';
-import { Box, Container } from "@mui/system";
-import { Typography } from "@mui/material";
-import ItemCounter from "./ItemCounter";
+import * as React from "react";
+import { Box } from "@mui/system";
+import { useEffect } from "react";
+import { useState } from "react";
+import { misProductos } from "./productos";
+import { useParams } from "react-router-dom";
+import ItemList from "./ItemList";
+import { Container } from "@mui/material";
 
-export default function ItemListContainer({greeting}) {
+
+export default function ItemListContainer() {
+
+  const { idcategoria } = useParams();
+	const [productos, setProductos] = useState([]);
+	useEffect(() => {
+		const productosPromise = new Promise((res, rej) => {
+			setTimeout(() => {
+				res(misProductos);
+			}, 2000);
+		});
+		productosPromise.then((res) => {
+			if (idcategoria) {
+				setProductos(res.filter((item) => idcategoria === item.categoria));
+			} else {
+				setProductos(res);
+			}
+		});
+	});
 
     return (
         <Container
@@ -16,9 +37,7 @@ export default function ItemListContainer({greeting}) {
         }}
       >
         <Box padding="3rem" sx={{display: "flex", flexDirection: "column", alignItems: "center", boxShadow: "0px 0px 10px #999"}}>
-            <Typography variant="h4">{greeting}</Typography>
-            <KeyboardIcon sx={{fontSize: "5em"}}/>
-            <ItemCounter stock={5} initial={1} />
+            <ItemList productos={productos} />
         </Box>
       </Container>
     );
