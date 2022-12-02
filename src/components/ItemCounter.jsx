@@ -1,9 +1,9 @@
 import { Button, Typography } from '@mui/material'
 import { Container } from '@mui/system'
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 
-export default function ItemCounter({stock, initial}){
 
+export default function ItemCounter({stock, initial, agregar}){
     const [count, setCount] = useState(initial)
 
     const onMenos = () => {
@@ -23,6 +23,7 @@ export default function ItemCounter({stock, initial}){
             <Button onClick={onMenos}>-</Button>
             <Typography>{count}</Typography>
             <Button onClick={onAdd}>+</Button>
+            <Button onClick={()=>agregar(count)}>AGREGAR</Button>
         </Container>
   )
 }

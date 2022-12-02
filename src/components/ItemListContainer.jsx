@@ -2,10 +2,10 @@ import * as React from "react";
 import { Box } from "@mui/system";
 import { useEffect } from "react";
 import { useState } from "react";
-import { misProductos } from "./productos";
 import { useParams } from "react-router-dom";
 import ItemList from "./ItemList";
 import { Container } from "@mui/material";
+import { getFirestore, collection, getDocs, query, where } from 'firebase/firestore';
 
 
 export default function ItemListContainer() {
@@ -13,19 +13,22 @@ export default function ItemListContainer() {
   const { idcategoria } = useParams();
 	const [productos, setProductos] = useState([]);
 	useEffect(() => {
-		const productosPromise = new Promise((res, rej) => {
-			setTimeout(() => {
-				res(misProductos);
-			}, 2000);
-		});
-		productosPromise.then((res) => {
-			if (idcategoria) {
-				setProductos(res.filter((item) => idcategoria === item.categoria));
-			} else {
-				setProductos(res);
-			}
-		});
-	});
+		const db = getFirestore();
+    let productos;
+    if (idcategoria) {
+      productos = query(collection(db, 'productos'), where('categoria', '==', idcategoria));
+    } else {
+      productos = collection(db, 'productos');
+    }
+
+    getDocs(productos).then((res) => {
+      const arrayNorm = res.docs.map((element) => {
+        return { id: element.id, nombre: element.data().nombre, categoria: element.data().categoria, precio: element.data().precio, stock: element.data().stock, imgUrl: element.data().imgUrl };
+      });
+
+        setProductos(arrayNorm)
+    });
+  }, [idcategoria]);
 
     return (
         <Container

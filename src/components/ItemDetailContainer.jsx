@@ -3,7 +3,7 @@ import React from "react";
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import ItemDetail from "./ItemDetail";
-import { misProductos } from "./productos";
+import { doc, getDoc, getFirestore } from 'firebase/firestore';
 
 export default function ItemDetailContainer() {
 	const { iditem } = useParams();
@@ -11,16 +11,14 @@ export default function ItemDetailContainer() {
 	const [producto, setProducto] = useState({});
 
 	useEffect(() => {
-		const productoPromise = new Promise((res, rej) => {
-			setTimeout(() => {
-				res(misProductos.find((item) => item.id == iditem));
-			}, 2000);
+		const db = getFirestore();
+	
+		let docSinNorm = doc(db, 'productos', iditem);
+	
+		getDoc(docSinNorm).then((item) => {
+		  setProducto({ id: item.id, ...item.data() });
 		});
-
-		productoPromise.then((res) => {
-			setProducto(res);
-		});
-	}, [iditem]);
+	  }, [iditem]);
 
 	return (
 		<Box sx={{ margin: "10px" }}>
