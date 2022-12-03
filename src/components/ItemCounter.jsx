@@ -6,6 +6,8 @@ import React, { useState } from 'react'
 export default function ItemCounter({stock, initial, agregar}){
     const [count, setCount] = useState(initial)
 
+    const checkStock = stock > 0;
+
     const onMenos = () => {
         if(count > 1){
             setCount(count-1)
@@ -23,7 +25,11 @@ export default function ItemCounter({stock, initial, agregar}){
             <Button onClick={onMenos}>-</Button>
             <Typography>{count}</Typography>
             <Button onClick={onAdd}>+</Button>
-            <Button onClick={()=>agregar(count)}>AGREGAR</Button>
+            {checkStock ? (
+				<Button onClick={() => agregar(count)}>AGREGAR</Button>
+			) : (
+				<Button disabled>AGREGAR</Button>
+			)}
         </Container>
   )
 }

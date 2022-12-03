@@ -6,6 +6,9 @@ import NavBar from "./components/Navbar";
 import ContextContainer from "./components/ContextContainer";
 import Checkout from "./components/Checkout";
 
+import ExitoCompra from "./components/ExitoCompra";
+import Brief from "./components/Brief";
+
 export default function App() {
   return (
     <>
@@ -20,6 +23,8 @@ export default function App() {
               element={<ItemListContainer />}
             />
             {<Route path="/item/:iditem" element={<ItemDetailContainer />} />}
+            <Route path="/GraciasPorSuCompra" element={<ExitoCompra />} />
+            <Route path="/pedidos" element={<Brief />} />
           </Routes>
           <Footer />
         </BrowserRouter>

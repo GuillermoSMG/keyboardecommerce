@@ -17,6 +17,7 @@ export default function ItemDetail({ producto }) {
 			{producto.id ?<Box sx={{display: "flex", flexDirection: "column", alignItems: "center"}}> 
 								<Typography variant="h5" gutterBottom>{producto.nombre}</Typography>
 								<CardMedia component="img" height="194" image={producto.imgUrl} />
+								<Typography variant="body1" gutterBottom>Stock:{producto.stock}</Typography>	
 								<Typography variant="body1" gutterBottom>${producto.precio}</Typography>
 								<ItemCounter stock={producto.stock} initial={1} agregar={agregar} />
 							</Box>

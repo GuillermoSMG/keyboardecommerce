@@ -1,36 +1,51 @@
-import { Button, TextField } from "@mui/material";
+import { Button, TextField, FormControl, Stack } from "@mui/material";
 import React, { useContext } from "react";
-import { useEffect } from "react";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom"
 import { contextoGeneral } from "./ContextContainer";
 import ItemCarrito from "./ItemCarrito";
 import { Container, Typography, Box } from "@mui/material";
-
+import { addDoc, collection, getFirestore, doc, updateDoc, increment } from 'firebase/firestore';
 
 export default function Checkout() {
-	const { carrito, totalAPagar } = useContext(contextoGeneral);
-	const [nombresProductos, setNombresProductos] = useState([]);
+	const { carrito, totalAPagar, clear, setPedidos } = useContext(contextoGeneral);
 	const [nombre, setNombre] = useState("");
 	const [tel, setTel] = useState("");
 	const [email, setEmail] = useState("");
+    const navigate = useNavigate()
+    
+    function handleClickComprar(){
+        const pedido = {
+            comprador : {nombre, tel, email},
+            items : carrito,
+            total: totalAPagar
+        }
+        setPedidos(localStorage.setItem("pedido", JSON.stringify(pedido)))
+        const db = getFirestore()
+        const pedidos = collection(db, "pedidos")
+        addDoc(pedidos, pedido).then(producto => 
+            carrito.forEach((item) => {
+            const productos = doc(db, "productos", item.id);
+            updateDoc(productos, { stock: increment(-item.quantity) });
+        }));
+        clearInfo()
+        success()
+    }
 
-	function cambioDeNombre() {
-		let nombres = carrito.map((item) => item.nombre);
-		setNombresProductos(nombres);
-	}
-	useEffect(() => {
-		cambioDeNombre();
-	}, [carrito]);
-	function botonComprar() {
-		cambioDeNombre();
-		alert(
-			nombre +
-				" quiere comprar " +
-				nombresProductos +
-				" total a pagar $" +
-				totalAPagar
-		);
-	}
+    function success(){
+        navigate("/GraciasPorSuCompra")
+        setTimeout(()=>{
+            navigate("/")
+        },2500)
+    }
+
+    function clearInfo(){
+        setTel("")
+        setEmail("")
+        setNombre("")
+        clear()
+    }
+
 	return (
 		<Container
 			sx={{
@@ -65,7 +80,7 @@ export default function Checkout() {
 					variant="filled"
 					value={email}
 				/>
-                {carrito.length ? <Button  onClick={botonComprar} value="Buy" variant="contained">Comprar</Button> : <Button variant="contained" disabled>Comprar</Button>}
+                {carrito.length ? <Button  onClick={handleClickComprar} value="Buy" variant="contained">Comprar</Button> : <Button variant="contained" disabled>Comprar</Button>}
 			</Box>
 		</Container>
 	);

@@ -18,6 +18,7 @@ export default function Item({ item }) {
 			<Typography variant="h5" gutterBottom>{item.nombre}</Typography>
 			<CardMedia component="img" height="194" image={item.imgUrl} />
 			<Typography variant="body1" gutterBottom>${item.precio}</Typography>
+			<Typography variant="body1" gutterBottom>Stock:{item.stock}</Typography>
 			<Link to={"/item/" + item.id}>Ir al item</Link>
             <ItemCounter stock={item.stock} initial={1} agregar={agregar} />
 		</Box>
