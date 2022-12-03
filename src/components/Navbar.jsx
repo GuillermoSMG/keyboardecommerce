@@ -15,7 +15,6 @@ import { contextoGeneral } from '../components/ContextContainer';
 
 const pages = [
 	{ label: "Home", link: "/" },
-	{ label: "Contacto", link: "/contacto" },
 	{ label: "Mouse", link: "/categoria/Mouse" },
 	{ label: "Teclado", link: "/categoria/Teclado" },
 ];
@@ -23,7 +22,9 @@ const pages = [
 export default function Navbar() {
 
   const { carrito } = React.useContext(contextoGeneral);
+  
   const [cant, setCant] = React.useState(0);
+
   React.useEffect(() => {
     setCant(carrito.reduce((acc, item) => acc + item.quantity, 0));
   }, [carrito]);
@@ -92,8 +93,8 @@ export default function Navbar() {
             >
               {pages.map((page) => (
                 <MenuItem key={page.label} onClick={handleCloseNavMenu}>
-                <Typography sx={{textDecoration: 'none'}} textAlign="center">
-                  <Link to={page.link}>{page.label}</Link>
+                <Typography textAlign="center">
+                  <Link style={{textDecoration: 'none', color: "#111"}} to={page.link}>{page.label}</Link>
                 </Typography>
               </MenuItem>
               ))}
@@ -123,12 +124,16 @@ export default function Navbar() {
               key={page.label}
               onClick={handleCloseNavMenu}
               sx={{ my: 2, color: "white", display: "block" }}>
-              <Link to={page.link}>{page.label}</Link>
+              <Link style={{textDecoration: 'none', color: "#fff"}} to={page.link}>{page.label}</Link>
             </Button>
             ))}
           </Box>
           <Box>
-            <CartWidget cant={cant} />
+          <Link
+							style={{ color: "white", textDecoration: "none" }}
+							to={"/Checkout"}>
+							<CartWidget cant={cant} />
+						</Link>
           </Box>
         </Toolbar>
       </Container>

@@ -4,7 +4,7 @@ import ItemDetailContainer from "./components/ItemDetailContainer";
 import ItemListContainer from "./components/ItemListContainer";
 import NavBar from "./components/Navbar";
 import ContextContainer from "./components/ContextContainer";
-import Contacto from "./components/Contacto";
+import Checkout from "./components/Checkout";
 
 export default function App() {
   return (
@@ -14,7 +14,7 @@ export default function App() {
           <NavBar />
           <Routes>
             <Route path="/" element={<ItemListContainer />} />
-            <Route path="/contacto" element={<Contacto />} />
+            <Route path="/Checkout" element={<Checkout />} />
             <Route
               path="/categoria/:idcategoria"
               element={<ItemListContainer />}

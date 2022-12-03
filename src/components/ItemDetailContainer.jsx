@@ -21,7 +21,7 @@ export default function ItemDetailContainer() {
 	  }, [iditem]);
 
 	return (
-		<Box sx={{ margin: "10px" }}>
+		<Box sx={{ margin: "10px", height: "75vh", display: "flex", justifyContent: "center", alignItems: "center" }}>
 			<ItemDetail producto={producto} />
 		</Box>
 	);

@@ -33,13 +33,12 @@ export default function ItemListContainer() {
     return (
         <Container
         sx={{
-          height: "80vh",
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
         }}
       >
-        <Box padding="3rem" sx={{display: "flex", flexDirection: "column", alignItems: "center", boxShadow: "0px 0px 10px #999"}}>
+        <Box padding="3rem" sx={{display: "flex", flexDirection: "column", alignItems: "center", padding: "0"}}>
             <ItemList productos={productos} />
         </Box>
       </Container>

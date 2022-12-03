@@ -6,11 +6,10 @@ export default function ItemList({ productos }) {
 	return (
 		<Box
 			sx={{
-				margin: "10px",
-				boxShadow: "0px 5px 20px #666",
-				display: "flex"
+				margin: "1rem",
+				display: "flex", flexWrap: "wrap", width: "fit-content", justifyContent: "center"
 			}}>
-			{!productos.length && "Cargando"}
+			{!productos.length && <Box sx={{ background: "#f8f8f8", margin: "1rem", padding: "1rem", borderRadius: "10px", height: "fit-content" }}>Cargando...</Box>}
 			{productos.map((item) => (
 				<Item item={item} />
 			))}
