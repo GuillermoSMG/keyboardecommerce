@@ -1,4 +1,4 @@
-import { Button, TextField, FormControl, Stack } from "@mui/material";
+import { Button, TextField } from "@mui/material";
 import React, { useContext } from "react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom"
@@ -13,21 +13,23 @@ export default function Checkout() {
 	const [tel, setTel] = useState("");
 	const [email, setEmail] = useState("");
     const navigate = useNavigate()
-    
+
     function handleClickComprar(){
         const pedido = {
             comprador : {nombre, tel, email},
             items : carrito,
             total: totalAPagar
         }
-        setPedidos(localStorage.setItem("pedido", JSON.stringify(pedido)))
+        
+        setPedidos(localStorage.setItem("pedidos", JSON.stringify(pedido)))
         const db = getFirestore()
         const pedidos = collection(db, "pedidos")
-        addDoc(pedidos, pedido).then(producto => 
+        addDoc(pedidos, pedido).then(producto => { 
             carrito.forEach((item) => {
             const productos = doc(db, "productos", item.id);
             updateDoc(productos, { stock: increment(-item.quantity) });
-        }));
+        })}
+        );
         clearInfo()
         success()
     }

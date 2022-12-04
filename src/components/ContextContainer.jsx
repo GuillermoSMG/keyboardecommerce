@@ -6,7 +6,7 @@ export const contextoGeneral = createContext();
 export default function ContextContainer({ children }) {
 	const [carrito, setCarrito] = useState(JSON.parse(localStorage.getItem("carrito")) || []);
 	const [totalAPagar, setTotalApagar] = useState(0);
-	const [pedidos, setPedidos] = useState(JSON.parse(localStorage.getItem("pedido")) || []);
+	const [pedidos, setPedidos] = useState(JSON.parse(localStorage.getItem("pedidos")) || []);
 
 	useEffect(() => {
 		localStorage.setItem("carrito", JSON.stringify(carrito));
