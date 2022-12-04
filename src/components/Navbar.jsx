@@ -17,7 +17,7 @@ const pages = [
 	{ label: "Home", link: "/" },
 	{ label: "Mouse", link: "/categoria/Mouse" },
 	{ label: "Teclado", link: "/categoria/Teclado" },
-  {label: "Ultima Compra", link: "/pedidos"}
+  {label: "Mis compras", link: "/pedidos"}
 ];
 
 export default function Navbar() {
