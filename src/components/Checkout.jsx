@@ -14,7 +14,9 @@ export default function Checkout() {
 	const [nombre, setNombre] = useState("");
 	const [tel, setTel] = useState("");
 	const [email, setEmail] = useState("");
-    const navigate = useNavigate()
+  const navigate = useNavigate()
+
+  let disableComprar = carrito.length > 0;
 
 	function validateEmail(email) {
 		let re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -99,11 +101,11 @@ export default function Checkout() {
                   <Stack direction="column" justifyContent="center" alignItems="center" spacing={1}>
                     <TextField
                       required
-					  error={!validateNombre(nombre)}
+					            error={!validateNombre(nombre)}
                       id="nombre-input"
                       label="nombre"
                       name="nombre"
-					  onKeyDown={validateNombre}
+					            onKeyDown={validateNombre}
                       placeholder="nombre"
                       margin="normal"
                       onChange={(e) => setNombre(e.target.value)}
@@ -117,8 +119,8 @@ export default function Checkout() {
                       required
                       id="email-input"
                       label="Email"
-					  error={!validateEmail(email)}
-					  onKeyDown={validateEmail}
+					            error={!validateEmail(email)}
+					            onKeyDown={validateEmail}
                       name="email"
                       placeholder="email"
                       margin="normal"
@@ -134,9 +136,9 @@ export default function Checkout() {
                       type="tel"
                       id="phone-input"
                       label="Tel"
-					  error={!validateTel(tel)}
+					            error={!validateTel(tel)}
                       name="tel"
-					  onKeyDown={validateTel}
+					            onKeyDown={validateTel}
                       placeholder="123456789"
                       margin="normal"
                       onChange={(e) => setTel(e.target.value)}
@@ -144,14 +146,11 @@ export default function Checkout() {
                       inputProps={{ maxLength: 12, minLength: 5 }}
                       InputLabelProps={{ shrink: true }}
                     />
-                    {carrito.length ? 
-					<Button type="submit" variant="outlined" color="success" startIcon={<AttachMoneyIcon />}>Comprar</Button> : 
-					<Button variant="contained" disabled startIcon={<AttachMoneyIcon />}>Comprar</Button>}
+					          <Button type="submit" variant="outlined" color="success" disabled={!disableComprar} startIcon={<AttachMoneyIcon />}>Comprar</Button>
                   </Stack>
                 </Box>
               </FormControl>
-            </form>
-                
+            </form>    
 			</Box>
 		</Container>
 	);

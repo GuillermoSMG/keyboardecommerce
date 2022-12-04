@@ -7,6 +7,7 @@ export default function ContextContainer({ children }) {
 	const [carrito, setCarrito] = useState(JSON.parse(localStorage.getItem("carrito")) || []);
 	const [totalAPagar, setTotalApagar] = useState(0);
 	const [pedidosArr, setPedidos] = useState(JSON.parse(localStorage.getItem("pedido")) || []);
+	const [compraId, setCompraId] = useState(JSON.parse(localStorage.getItem("compraId")) || []);
 
 	useEffect(() => {
 		localStorage.setItem("carrito", JSON.stringify(carrito));
@@ -45,5 +46,5 @@ export default function ContextContainer({ children }) {
 		setTotalApagar(tot);
 	}, [carrito]);
 
-	return <contextoGeneral.Provider value={{ carrito, addItem, removeItem, clear, totalAPagar, pedidosArr, setPedidos }}>{children}</contextoGeneral.Provider>;
+	return <contextoGeneral.Provider value={{ carrito, addItem, removeItem, clear, totalAPagar, pedidosArr, setPedidos, compraId, setCompraId }}>{children}</contextoGeneral.Provider>;
 }

@@ -6,7 +6,6 @@ import { contextoGeneral } from "./ContextContainer";
 export default function Brief() {
 
 	const { pedidosArr } = useContext(contextoGeneral);
-
   return (
     <Container>
       {pedidosArr.length ? pedidosArr.map((item)=> (<Box sx={{ background: "#f8f8f8", margin: "1rem",display: "flex",flexDirection:"column", alignItems: "center", padding: "1rem", borderRadius: "10px", height: "fit-content" }}>
