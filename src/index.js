@@ -3,6 +3,18 @@ import ReactDOM from "react-dom/client";
 import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
+import { initializeApp } from "firebase/app";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyDtyxN9_549V_Dzb569g_rNwNSr6lJJ_Is",
+  authDomain: "keyboardecommerce.firebaseapp.com",
+  projectId: "keyboardecommerce",
+  storageBucket: "keyboardecommerce.appspot.com",
+  messagingSenderId: "61178848211",
+  appId: "1:61178848211:web:7f9c5f140de2958902c526",
+};
+
+initializeApp(firebaseConfig);
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(

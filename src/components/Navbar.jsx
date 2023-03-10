@@ -10,10 +10,26 @@ import Container from '@mui/material/Container';
 import Button from '@mui/material/Button';
 import MenuItem from '@mui/material/MenuItem';
 import CartWidget from './CartWidget';
+import { Link } from 'react-router-dom'
+import { contextoGeneral } from '../components/ContextContainer';
 
-const pages = ['Inicio', 'Tienda', 'Contacto'];
+const pages = [
+	{ label: "Home", link: "/" },
+	{ label: "Mouse", link: "/categoria/Mouse" },
+	{ label: "Teclado", link: "/categoria/Teclado" },
+  {label: "Mis compras", link: "/pedidos"}
+];
 
 export default function Navbar() {
+
+  const { carrito } = React.useContext(contextoGeneral);
+  
+  const [cant, setCant] = React.useState(0);
+
+  React.useEffect(() => {
+    setCant(carrito.reduce((acc, item) => acc + item.quantity, 0));
+  }, [carrito]);
+
   const [anchorElNav, setAnchorElNav] = React.useState(null);
 
   const handleOpenNavMenu = (event) => {
@@ -77,9 +93,11 @@ export default function Navbar() {
               }}
             >
               {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{page}</Typography>
-                </MenuItem>
+                <MenuItem key={page.label} onClick={handleCloseNavMenu}>
+                <Typography textAlign="center">
+                  <Link style={{textDecoration: 'none', color: "#111"}} to={page.link}>{page.label}</Link>
+                </Typography>
+              </MenuItem>
               ))}
             </Menu>
           </Box>
@@ -99,22 +117,24 @@ export default function Navbar() {
               textDecoration: 'none',
             }}
           >
-            MiApp
+            Keyboard
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' },  justifyContent: "end", paddingRight: "2rem"  }}>
             {pages.map((page) => (
               <Button
-                key={page}
-                onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: 'white', display: 'block' }}
-              >
-                {page}
-              </Button>
+              key={page.label}
+              onClick={handleCloseNavMenu}
+              sx={{ my: 2, color: "white", display: "block" }}>
+              <Link style={{textDecoration: 'none', color: "#fff"}} to={page.link}>{page.label}</Link>
+            </Button>
             ))}
           </Box>
-
           <Box>
-                <CartWidget />
+          <Link
+							style={{ color: "white", textDecoration: "none" }}
+							to={"/Checkout"}>
+							<CartWidget cant={cant} />
+						</Link>
           </Box>
         </Toolbar>
       </Container>
