@@ -1,20 +1,25 @@
-import { Button, FormControl, TextField } from "@mui/material";
-import React, { useContext } from "react";
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { contextoGeneral } from "./ContextContainer";
-import ItemCarrito from "./ItemCarrito";
-import { Container, Typography, Box } from "@mui/material";
+import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
+import {
+  Box,
+  Button,
+  Container,
+  FormControl,
+  TextField,
+  Typography,
+} from "@mui/material";
+import { Stack } from "@mui/system";
 import {
   addDoc,
   collection,
-  getFirestore,
   doc,
-  updateDoc,
+  getFirestore,
   increment,
+  updateDoc,
 } from "firebase/firestore";
-import { Stack } from "@mui/system";
-import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
+import React, { useContext, useState } from "react";
+import { Toaster, toast } from "react-hot-toast";
+import { contextoGeneral } from "./ContextContainer";
+import ItemCarrito from "./ItemCarrito";
 
 export default function Checkout() {
   const { carrito, totalAPagar, clear, setPedidos, pedidosArr } =
@@ -22,7 +27,6 @@ export default function Checkout() {
   const [nombre, setNombre] = useState("");
   const [tel, setTel] = useState("");
   const [email, setEmail] = useState("");
-  const navigate = useNavigate();
 
   let disableComprar = carrito.length > 0;
 
@@ -52,12 +56,11 @@ export default function Checkout() {
       items: carrito,
       total: totalAPagar,
     };
-    if (!nombre || !email || !tel) {
-      return;
-    }
+    if (!nombre || !email || !tel) return;
     if (!validateEmail(email) || !validateTel(tel) || !validateNombre(nombre)) {
       return;
     }
+
     setPedidos([...pedidosArr, { ...pedido }]);
     localStorage.setItem("pedido", JSON.stringify(pedidosArr));
     const db = getFirestore();
@@ -73,10 +76,14 @@ export default function Checkout() {
   }
 
   function success() {
-    navigate("/GraciasPorSuCompra");
-    setTimeout(() => {
-      navigate("/");
-    }, 2500);
+    toast.success("Thank you for your purchase!", {
+      style: {
+        borderRadius: "10px",
+        background: "#333",
+        color: "#fff",
+      },
+      position: "top-right",
+    });
   }
 
   function clearInfo() {
@@ -174,6 +181,7 @@ export default function Checkout() {
           </FormControl>
         </form>
       </Box>
+      <Toaster />
     </Container>
   );
 }

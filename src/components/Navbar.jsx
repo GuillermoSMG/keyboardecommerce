@@ -92,16 +92,15 @@ export default function Navbar() {
               }}
             >
               {pages.map((page) => (
-                <MenuItem key={page.label} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">
-                    <Link
-                      style={{ textDecoration: "none", color: "#111" }}
-                      to={page.link}
-                    >
-                      {page.label}
-                    </Link>
-                  </Typography>
-                </MenuItem>
+                <Link
+                  key={page.label}
+                  style={{ textDecoration: "none", color: "#111" }}
+                  to={page.link}
+                >
+                  <MenuItem onClick={handleCloseNavMenu}>
+                    <Typography textAlign="center">{page.label}</Typography>
+                  </MenuItem>
+                </Link>
               ))}
             </Menu>
           </Box>
@@ -109,7 +108,7 @@ export default function Navbar() {
             variant="h5"
             noWrap
             component="a"
-            href=""
+            href="/"
             sx={{
               mr: 2,
               display: { xs: "flex", md: "none" },
@@ -132,18 +131,18 @@ export default function Navbar() {
             }}
           >
             {pages.map((page) => (
-              <Button
+              <Link
+                style={{ textDecoration: "none", color: "#fff" }}
+                to={page.link}
                 key={page.label}
-                onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: "white", display: "block" }}
               >
-                <Link
-                  style={{ textDecoration: "none", color: "#fff" }}
-                  to={page.link}
+                <Button
+                  onClick={handleCloseNavMenu}
+                  sx={{ my: 2, color: "white", display: "block" }}
                 >
                   {page.label}
-                </Link>
-              </Button>
+                </Button>
+              </Link>
             ))}
           </Box>
           <Box>
