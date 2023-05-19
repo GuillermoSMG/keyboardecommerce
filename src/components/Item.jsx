@@ -1,8 +1,8 @@
-import { Box, CardMedia, Typography } from "@mui/material";
-import React, { useContext } from "react";
-import { Link } from "react-router-dom";
-import ItemCounter from "./ItemCounter";
-import { contextoGeneral } from "../components/ContextContainer";
+import { Box, CardMedia, Typography } from '@mui/material';
+import React, { useContext } from 'react';
+import { Link } from 'react-router-dom';
+import ItemCounter from './ItemCounter';
+import { contextoGeneral } from '../components/ContextContainer';
 
 export default function Item({ item }) {
   const { addItem, carrito } = useContext(contextoGeneral);
@@ -12,34 +12,55 @@ export default function Item({ item }) {
   }
 
   const cantidad = carrito
-    .filter((cart) => cart.id === item.id)
-    .map((cart) => cart.quantity);
+    .filter(cart => cart.id === item.id)
+    .map(cart => cart.quantity);
 
   return (
     <Box
       sx={{
-        background: "#f8f8f8",
-        margin: "1rem",
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        padding: "1rem",
-        borderRadius: "10px",
-        height: "fit-content",
+        background: '#f8f8f8',
+        margin: '1rem',
+        display: 'flex',
+        flexDirection: 'column',
+        gap: '1rem',
+        alignItems: 'center',
+        padding: '1rem',
+        borderRadius: '10px',
+        height: 'fit-content',
       }}
       key={item.id}
     >
-      <Typography variant="h5" gutterBottom>
-        {item.nombre}
-      </Typography>
-      <CardMedia component="img" height="194" image={item.imgUrl} />
-      <Typography variant="body1" gutterBottom>
+      <Link
+        style={{ textDecoration: 'none' }}
+        to={`/item/${item.id}`}
+      >
+        <Typography
+          variant='h5'
+          gutterBottom
+          sx={{ color: '#000' }}
+        >
+          {item.nombre}
+        </Typography>
+      </Link>
+      <Link to={`/item/${item.id}`}>
+        <CardMedia
+          component='img'
+          height='194'
+          image={item.imgUrl}
+        />
+      </Link>
+      <Typography
+        variant='body1'
+        gutterBottom
+      >
         ${item.precio}
       </Typography>
-      <Typography variant="body1" gutterBottom>
+      <Typography
+        variant='body1'
+        gutterBottom
+      >
         Stock:{item.stock}
       </Typography>
-      <Link to={"/item/" + item.id}>Ir al item</Link>
       <ItemCounter
         stock={item.stock - cantidad}
         initial={1}
