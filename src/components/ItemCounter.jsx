@@ -1,7 +1,8 @@
-import { Button, Typography } from "@mui/material";
-import { Container } from "@mui/system";
-import React, { useState } from "react";
-import { Toaster, toast } from "react-hot-toast";
+import { Button, Typography } from '@mui/material';
+import { Container } from '@mui/system';
+import React, { useState } from 'react';
+import { Toaster } from 'react-hot-toast';
+import { showToastAdd } from '../utils/toasts';
 
 export default function ItemCounter({ stock, initial, agregar, cantidad }) {
   const [count, setCount] = useState(initial);
@@ -20,27 +21,15 @@ export default function ItemCounter({ stock, initial, agregar, cantidad }) {
     }
   };
 
-  function showToast() {
-    toast.success("Added to cart.", {
-      style: {
-        borderRadius: "10px",
-        background: "#333",
-        color: "#fff",
-        width: "300px",
-      },
-      position: "top-center",
-    });
-  }
-
   return (
-    <Container sx={{ display: "flex" }}>
+    <Container sx={{ display: 'flex' }}>
       <Button onClick={onMenos}>-</Button>
       <Typography>{count}</Typography>
       <Button onClick={onAdd}>+</Button>
       <Button
         onClick={() => {
           agregar(count);
-          showToast();
+          showToastAdd();
         }}
         disabled={!checkStock}
       >

@@ -1,25 +1,25 @@
-import React, { useState, createContext, useEffect } from "react";
+import React, { useState, createContext, useEffect } from 'react';
 
 export const contextoGeneral = createContext();
 
 export default function ContextContainer({ children }) {
-  const [carrito, setCarrito] = useState(
-    JSON.parse(localStorage.getItem("carrito")) || []
-  );
   const [totalAPagar, setTotalApagar] = useState(0);
+  const [carrito, setCarrito] = useState(
+    JSON.parse(localStorage.getItem('carrito')) || []
+  );
   const [pedidosArr, setPedidos] = useState(
-    JSON.parse(localStorage.getItem("pedido")) || []
+    JSON.parse(localStorage.getItem('pedido')) || []
   );
   const [compraId, setCompraId] = useState(
-    JSON.parse(localStorage.getItem("compraId")) || []
+    JSON.parse(localStorage.getItem('compraId')) || []
   );
 
   useEffect(() => {
-    localStorage.setItem("carrito", JSON.stringify(carrito));
+    localStorage.setItem('carrito', JSON.stringify(carrito));
   }, [carrito]);
 
   function posInCart(id) {
-    const pos = carrito.findIndex((item) => item.id === id);
+    const pos = carrito.findIndex(item => item.id === id);
     return pos;
   }
 
@@ -38,7 +38,7 @@ export default function ContextContainer({ children }) {
   }
 
   function removeItem(id) {
-    setCarrito(carrito.filter((product) => product.id !== id));
+    setCarrito(carrito.filter(product => product.id !== id));
   }
 
   function clear() {
