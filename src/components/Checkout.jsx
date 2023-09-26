@@ -99,7 +99,7 @@ export default function Checkout() {
                   required
                   error={!validateName(nombre)}
                   id='nombre-input'
-                  label='nombre'
+                  label='Nombre'
                   name='nombre'
                   onKeyDown={validateName}
                   placeholder='nombre'

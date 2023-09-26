@@ -32,14 +32,14 @@ export default function ItemDetail({ producto }) {
           }}
         >
           <Typography variant='h5' gutterBottom>
-            {producto.nombre}
+            {producto.name}
           </Typography>
           <CardMedia component='img' height='194' image={producto.imgUrl} />
           <Typography variant='body1' gutterBottom>
             Stock:{producto.stock}
           </Typography>
           <Typography variant='body1' gutterBottom>
-            ${producto.precio}
+            {producto.price}
           </Typography>
           <ItemCounter stock={producto.stock} initial={1} agregar={agregar} />
         </Box>

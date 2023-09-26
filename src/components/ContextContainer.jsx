@@ -1,21 +1,22 @@
-import React, { useState, createContext, useEffect } from 'react';
+import { useState, createContext, useEffect } from 'react';
+import { LOCAL_STORAGE } from '../consts/consts';
 
 export const contextoGeneral = createContext();
 
 export default function ContextContainer({ children }) {
   const [totalAPagar, setTotalApagar] = useState(0);
   const [carrito, setCarrito] = useState(
-    JSON.parse(localStorage.getItem('carrito')) || []
+    JSON.parse(localStorage.getItem(LOCAL_STORAGE.CARRITO)) || []
   );
   const [pedidosArr, setPedidos] = useState(
-    JSON.parse(localStorage.getItem('pedido')) || []
+    JSON.parse(localStorage.getItem(LOCAL_STORAGE.PEDIDO)) || []
   );
   const [compraId, setCompraId] = useState(
-    JSON.parse(localStorage.getItem('compraId')) || []
+    JSON.parse(localStorage.getItem(LOCAL_STORAGE.COMPRA)) || []
   );
 
   useEffect(() => {
-    localStorage.setItem('carrito', JSON.stringify(carrito));
+    localStorage.setItem(LOCAL_STORAGE.CARRITO, JSON.stringify(carrito));
   }, [carrito]);
 
   function posInCart(id) {

@@ -26,9 +26,9 @@ export default function ItemListContainer() {
       const arrayNorm = res.docs.map(element => {
         return {
           id: element.id,
-          nombre: element.data().nombre,
+          nombre: element.data().name,
           categoria: element.data().categoria,
-          precio: element.data().precio,
+          precio: element.data().price,
           stock: element.data().stock,
           imgUrl: element.data().imgUrl,
         };
@@ -36,7 +36,6 @@ export default function ItemListContainer() {
       setProductos(arrayNorm);
     });
   }, [idcategoria]);
-
   return (
     <Container
       sx={{

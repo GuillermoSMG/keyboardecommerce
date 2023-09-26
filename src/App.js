@@ -1,12 +1,12 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import Brief from './components/Brief';
+import Checkout from './components/Checkout';
+import ContextContainer from './components/ContextContainer';
+import ExitoCompra from './components/ExitoCompra';
 import Footer from './components/Footer';
 import ItemDetailContainer from './components/ItemDetailContainer';
 import ItemListContainer from './components/ItemListContainer';
 import NavBar from './components/Navbar';
-import ContextContainer from './components/ContextContainer';
-import Checkout from './components/Checkout';
-import ExitoCompra from './components/ExitoCompra';
-import Brief from './components/Brief';
 
 export default function App() {
   return (

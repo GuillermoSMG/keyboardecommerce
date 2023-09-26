@@ -8,7 +8,11 @@ import { contextoGeneral } from './ContextContainer';
 export default function ItemCarrito() {
   const { carrito, removeItem, clear } = useContext(contextoGeneral);
   useEffect(() => {}, [carrito]);
-
+  const parseCarrito = carrito.map(producto =>
+    producto.precio.startsWith('U')
+      ? producto.precio.replace('U$S', '')
+      : producto.precio.replace('$', '')
+  );
   return (
     <Container
       style={{
@@ -30,7 +34,7 @@ export default function ItemCarrito() {
           <Typography variant='h6'>Su carrito se encuentra vacio</Typography>
         </Container>
       )}
-      {carrito.map(producto => (
+      {carrito.map((producto, i) => (
         <Container
           key={producto.id}
           style={{
@@ -47,11 +51,16 @@ export default function ItemCarrito() {
             Categoria: {producto.categoria}
           </Typography>
           <Typography variant='body1'>
-            Precio por unidad: ${producto.precio}
+            Precio por unidad: {producto.precio}
           </Typography>
           <Typography variant='body1'>Cantidad: {producto.quantity}</Typography>
           <Typography variant='body1'>
-            Precio total: ${producto.precio * producto.quantity}
+            Precio total:{' '}
+            {`${
+              producto.precio.startsWith('U')
+                ? producto.precio.substring(0, 3)
+                : producto.precio.substring(0, 1)
+            }${Number(parseCarrito[i]) * producto.quantity}`}
           </Typography>
           <Button onClick={() => removeItem(producto.id)}>Eliminar</Button>
         </Container>

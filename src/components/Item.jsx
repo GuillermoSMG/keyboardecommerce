@@ -30,35 +30,22 @@ export default function Item({ item }) {
       }}
       key={item.id}
     >
-      <Link
-        style={{ textDecoration: 'none' }}
-        to={`/item/${item.id}`}
-      >
+      <Link style={{ textDecoration: 'none' }} to={`/item/${item.id}`}>
         <Typography
           variant='h5'
           gutterBottom
-          sx={{ color: '#000' }}
+          sx={{ color: '#000', textOverflow: 'ellipsis' }}
         >
           {item.nombre}
         </Typography>
       </Link>
       <Link to={`/item/${item.id}`}>
-        <CardMedia
-          component='img'
-          height='194'
-          image={item.imgUrl}
-        />
+        <CardMedia component='img' height='194' image={item.imgUrl} />
       </Link>
-      <Typography
-        variant='body1'
-        gutterBottom
-      >
-        ${item.precio}
+      <Typography variant='body1' gutterBottom>
+        {item.precio}
       </Typography>
-      <Typography
-        variant='body1'
-        gutterBottom
-      >
+      <Typography variant='body1' gutterBottom>
         Stock:{item.stock}
       </Typography>
       <ItemCounter
