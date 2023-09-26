@@ -1,12 +1,5 @@
 import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
-import {
-  Box,
-  Button,
-  Container,
-  FormControl,
-  TextField,
-  Typography,
-} from '@mui/material';
+import { Box, Button, Container, FormControl, TextField } from '@mui/material';
 import { Stack } from '@mui/system';
 import {
   addDoc,
@@ -19,6 +12,7 @@ import { useContext, useState } from 'react';
 import { Toaster } from 'react-hot-toast';
 import { db } from '../services/firebase';
 
+import { COLLECTIONS } from '../consts/consts';
 import { successToast } from '../utils/toasts';
 import {
   validateEmail,
@@ -27,7 +21,6 @@ import {
 } from '../utils/validations.js';
 import { contextoGeneral } from './ContextContainer';
 import ItemCarrito from './ItemCarrito';
-import { COLLECTIONS } from '../consts/consts';
 
 export default function Checkout() {
   const { carrito, totalAPagar, clear, setPedidos, pedidosArr } =
@@ -79,7 +72,6 @@ export default function Checkout() {
       <Box style={{ display: 'flex' }}>
         <ItemCarrito />
       </Box>
-      <Typography>Total a pagar: ${totalAPagar} </Typography>
       <Box sx={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
         <form action='/checkout' onSubmit={handleSubmit}>
           <FormControl fullWidth>

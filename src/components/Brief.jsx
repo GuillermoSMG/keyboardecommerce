@@ -22,35 +22,17 @@ export default function Brief() {
               minHeight: 'fit-content',
             }}
           >
-            <Typography
-              variant='h5'
-              gutterBottom
-            >
+            <Typography variant='h5' gutterBottom>
               Comprador: {item?.comprador?.nombre}
             </Typography>
-            <Typography
-              variant='body1'
-              gutterBottom
-            >
+            <Typography variant='body1' gutterBottom>
               Email: {item?.comprador?.email}
             </Typography>
-            <Typography
-              variant='body1'
-              gutterBottom
-            >
+            <Typography variant='body1' gutterBottom>
               Tel: {item?.comprador?.tel}
             </Typography>
-            <Typography
-              variant='body1'
-              gutterBottom
-            >
+            <Typography variant='body1' gutterBottom>
               Items: {item?.items?.map(prod => prod?.nombre + ', ')}
-            </Typography>
-            <Typography
-              variant='body1'
-              gutterBottom
-            >
-              Precio: ${item?.total}
             </Typography>
           </Box>
         ))
